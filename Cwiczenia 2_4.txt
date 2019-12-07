@@ -1,0 +1,4 @@
+Odpowiedź:
+Interfejs to zbiór metod, które  trzeba zaimplementować w danej klasie. 
+Klasa abstrakcyjna jest to klasa z której nie możemy stworzyć obiektów, może dziedziczyć tylko po jednej klasie, a może implementować wiele interfejsów. 
+W interfejsach można deklarować metody, bez możliwośći ich implementacji natomiast w klasach trzeba je zaimplementować. 
