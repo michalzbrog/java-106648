@@ -1,0 +1,6 @@
+Odpowiedz:
+Glowna ronica polega na tym, ze klasy abstrakcyjne nie moga miec implementacji, za to moga miec metody, ktore sa domyslnym zachowaniem.
+Zmienne deklarowane w interfejsie sa domyslnie ustawione na final, a klasa abstrakcyjna moze zawierac zmienne non-final.
+Interface jest z domyslu publiczny, a klasy abstrakcyjne moga miec ustawienia klas np. private albo protected.
+Interface implementujemy slowem 'implements', a klase abstrakcyjna 'extends'.
+Interface moze rozszerzac tylko inny interface, a klasa moze rozszerzac inna klase oraz implementowac wiele interface.
