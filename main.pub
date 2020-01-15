@@ -1,0 +1,9 @@
+// tutaj napisz niestatyczna metode contains
+  <T> boolean contains(T[] lista, T elem) {
+    for (T el : lista) {
+      if (el.equals(elem)) {
+        return true;
+      }
+    }
+    return false;
+  }

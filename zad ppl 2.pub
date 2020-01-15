@@ -1,0 +1,100 @@
+//Dla klasy People2 zobacz jak dzia�a HashSet.
+//	1) Dodaj kilka os�b do zbioru
+//	2) Stw�rz dwa obiekty  tak samo si� nazywaj�ce i maj�ce tyle samo lat (takie same osoby).
+//		Spr�buj doda� te elementy do zbioru. Uda�o si�?
+//	3) Zaimplementuj poprawnie hashCode() oraz equals(...)
+//		i sprawd� teraz czy si� powy�sza procedura powiod�a
+//	4) Utw�rz TreeSet dla People i niech b�dzie domy�lnie
+//		sortowany po Comparable (wiek rosn�co)
+//	5) Utw�rz kolejny TreeSet ale posortowany po wieku malej�co.
+
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.TreeSet;
+
+public class People2 implements Comparable<People2> {
+
+
+    // miejsce na Tw�j kod
+    String imie;
+    String nazwisko;
+    int wiek;
+
+    People2(String imie, String nazw, int wiek) {
+        this.imie = imie;
+        this.nazwisko = nazw;
+        this.wiek = wiek;
+    }
+
+    @Override
+    public String toString() {
+        return imie + " " + nazwisko + " " + " lat " + wiek;
+    }
+
+    @Override
+    public int compareTo(People2 o) {
+        if (this.wiek == o.wiek) {
+            return 0;
+        } else if (this.wiek > o.wiek) {
+            return 1;
+        }
+        return -1;
+    }
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		People2 people2 = (People2) o;
+		return wiek == people2.wiek &&
+				Objects.equals(imie, people2.imie) &&
+				Objects.equals(nazwisko, people2.nazwisko);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(imie, nazwisko, wiek);
+	}
+
+	public static void main(String[] args) {
+
+    	// powiedzie się go hashCode jest domyślne - powiedzie się znaczy ze dodane będą oba elementy
+		// po implementacji obu metod do zbioru zostanie dodany tylko pierwszy obiekt - hashSet nie pozwoli dodać powtarzającej się instancji klasy People2
+		HashSet<People2> zbior = new HashSet<>();
+    	zbior.add(new People2("Jan", "Nowak", 22));
+    	zbior.add(new People2("Jan", "Nowak", 22));
+
+		System.out.println(zbior.size());
+
+		TreeSet<People2> tree1 = new TreeSet<>();
+		tree1.add(new People2("Jan", "Nowak3", 44));
+		tree1.add(new People2("Jan", "Nowak2", 33));
+		tree1.add(new People2("Jan", "Nowak5", 66));
+		tree1.add(new People2("Jan", "Nowak", 22));
+		tree1.add(new People2("Jan", "Nowak4", 55));
+
+		for (People2 p : tree1) {
+			System.out.println(p);
+		}
+
+		System.out.println();
+
+		TreeSet<People2> tree2 = new TreeSet<>(new Comparator<People2>() {
+			@Override
+			public int compare(People2 o1, People2 o2) {
+				return o2.wiek - o1.wiek;
+			}
+		});
+		tree2.add(new People2("Jan", "Nowak3", 44));
+		tree2.add(new People2("Jan", "Nowak2", 33));
+		tree2.add(new People2("Jan", "Nowak5", 66));
+		tree2.add(new People2("Jan", "Nowak", 22));
+		tree2.add(new People2("Jan", "Nowak4", 55));
+
+		for (People2 p : tree2) {
+			System.out.println(p);
+		}
+    }
+
+}

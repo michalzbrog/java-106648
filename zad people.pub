@@ -1,0 +1,71 @@
+// Stw�rz klas� People (imi�, nazwisko, wiek).
+// Utw�rz List<People> i wrzu� tam kilka element�w.
+//	1) Spraw aby drukuj�c wszystkie elementy: linijka System.out.println(person); drukowa�a dane o osobie w przystepnej formie.
+//	2) Poka� przyk�ad sortowania malej�co wg. wieku za pomoc� interfejsu Comparable
+//	3) Poka� przyk�ad sortowania malej�co wg. nazwiska osoby przy u�yciu komparatora
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+public class People implements Comparable<People> {
+
+	// miejsce na Tw�j kod
+    String imie;
+    String nazwisko;
+    int wiek;
+
+    People(String imie, String nazw, int wiek) {
+        this.imie = imie;
+        this.nazwisko = nazw;
+        this.wiek = wiek;
+    }
+
+    @Override
+    public String toString() {
+        return imie + " " + nazwisko + " " + " lat " + wiek;
+    }
+
+    @Override
+    public int compareTo(People o) {
+        if (this.wiek == o.wiek) {
+            return 0;
+        }else if (this.wiek > o.wiek) {
+            return -1;
+        }
+        return 1;
+    }
+}
+
+
+ class Main {
+
+    public static void main(String[] args) {
+
+        List<People> lista = new ArrayList<People>();
+
+        lista.add(new People("Jacek", "Placek", 22));
+        lista.add(new People("Jurek", "Kowalski", 33));
+        lista.add(new People("Robert", "Tust", 44));
+        lista.add(new People("Paweł", "Kic", 55));
+        lista.add(new People("Jan", "Dan", 66));
+
+        Collections.sort(lista);
+        for (People p : lista) {
+            System.out.println(p);
+        }
+
+        System.out.println();
+
+        Collections.sort(lista, new Comparator<People>() {
+            @Override
+            public int compare(People o1, People o2) {
+                return o2.nazwisko.compareTo(o1.nazwisko);
+            }
+        });
+        for (People p : lista) {
+            System.out.println(p);
+        }
+    }
+}
