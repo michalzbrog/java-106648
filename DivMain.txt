@@ -1,0 +1,29 @@
+public class DivMain extends Thread {
+	public int x;
+	public int y;
+	
+	public DivMain(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+	
+	 @Override 
+	 public void run() {
+		 
+		 for(int i=x;i<y;i++) {
+			if (i%3==0) {
+	System.out.println(i);
+			}}
+		  }	public static void main(String[] args) {
+		 			DivMain div5 = new DivMain(0,100);
+		 			DivMain div4 = new DivMain(101, 200);
+		 			DivMain div3 = new DivMain(201, 300);
+		 			DivMain div2 = new DivMain(301, 400);
+		 			DivMain div1 = new DivMain(401, 500);
+	div1.start();
+	div2.start();
+	div3.start();
+	div4.start();
+	div5.start();
+	}
+} 
