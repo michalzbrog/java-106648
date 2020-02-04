@@ -1,0 +1,77 @@
+public class Account {
+
+    static class NoPiniondzeException extends Exception {
+    }
+
+    private int saldo = 500;
+
+    public int getPiniondze() {
+        saldo = saldo - 50;
+        return 50;
+    }
+
+    public int checkSaldo() {
+        return this.saldo;
+    }
+
+}
+
+
+public class Zad3 {
+
+    public static void main(String[] args) throws Account.NoPiniondzeException {
+
+        class Zona extends Thread {
+
+            private final Account konto;
+
+            private Zona(Account kon) {
+                this.konto = kon;
+            }
+
+            public void run() {
+                for (int i = 0; i < 100; i++) {
+                    synchronized (konto) {
+                        if (konto.checkSaldo() > 49) {
+                            try {
+                                Thread.sleep(500);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            konto.getPiniondze();
+                        }
+                    }
+                }
+            }
+        }
+
+
+        Account account = new Account();
+        Zona zona1 = new Zona(account);
+        Zona zona2 = new Zona(account);
+        Zona zona3 = new Zona(account);
+        Zona zona4 = new Zona(account);
+        Zona zona5 = new Zona(account);
+        Zona zona6 = new Zona(account);
+
+        zona1.start();
+        zona2.start();
+        zona3.start();
+        zona4.start();
+        zona5.start();
+        zona6.start();
+
+        try {
+            zona1.join();
+            zona2.join();
+            zona3.join();
+            zona4.join();
+            zona5.join();
+            zona6.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Piniondze męża = " + account.checkSaldo());
+    }
+}
